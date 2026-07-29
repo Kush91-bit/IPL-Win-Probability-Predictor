@@ -1,93 +1,51 @@
-# 🏏 IPL Win Probability Predictor
+# 🏏 IPL Match Win Probability Predictor
 
-An end-to-end Machine Learning project that predicts the winning probability of the chasing team during an IPL match using ball-by-ball match data.
+An end-to-end Machine Learning project that predicts the **winning probability of the chasing team** during an IPL match using historical ball-by-ball data.
+
+🔗 **Live Demo:** https://ipl-win-probability-predictor-4wrrnpckoz5socfw3zdkgl.streamlit.app/
+
+📂 **GitHub Repository:** https://github.com/Kush91-bit/IPL-Win-Probability-Predictor
 
 ---
+
 ## 📌 Project Overview
 
-This project predicts the winning probability of the chasing team during an Indian Premier League (IPL) match using Machine Learning.
+This project predicts the live winning probability of the chasing team based on the current match situation.
 
-The model takes the current match situation as input, including:
+The application takes the following inputs:
 
 - Batting Team
 - Bowling Team
 - Host City
 - Target Score
 - Current Score
-- Balls Remaining
+- Overs Completed
+- Wickets Fallen
+
+Using these inputs, the application computes important match-state features such as:
+
+- Runs Left
+- Balls Left
 - Wickets Remaining
 - Current Run Rate (CRR)
 - Required Run Rate (RRR)
 
-Based on these features, the model predicts the probability of both teams winning the match.
-
-The project also includes a Streamlit web application where users can interactively enter match details and get live win probability predictions.
-## 📂 Dataset
-
-The project uses historical IPL ball-by-ball data.
-
-### Files Used
-
-- **matches.csv** – Contains match-level information such as teams, venue, winner, city, and target score.
-- **deliveries.csv** – Contains ball-by-ball data including runs scored, wickets, over number, and batting/bowling teams.
-
-### Data Preprocessing
-
-The dataset was cleaned before training the models by:
-
-- Removing Duckworth-Lewis (D/L) affected matches.
-- Standardizing old team names.
-- Selecting only the teams available in the dataset.
-- Filtering only second innings data for win probability prediction.
-- Creating new match-state features using ball-by-ball information.
-## ⚙️ Feature Engineering
-
-The following features were engineered from the raw match data:
-
-| Feature | Description |
-|---------|-------------|
-| Runs Left | Runs required to win |
-| Balls Left | Balls remaining in the innings |
-| Wickets | Wickets remaining |
-| Target Score | First innings total |
-| Current Run Rate (CRR) | Current scoring rate |
-| Required Run Rate (RRR) | Required scoring rate |
-| Batting Team | Team chasing the target |
-| Bowling Team | Team defending the target |
-| Host City | Match venue city |
-
-These engineered features represent the current state of the match and are used as inputs to the machine learning models.
-# 🏏 IPL Win Probability Predictor
-
-An end-to-end Machine Learning project that predicts the winning probability of the chasing team during an IPL match using ball-by-ball match data.
+These features are then passed to a trained Machine Learning model to estimate the winning probability of both teams.
 
 ---
 
-## 📌 Project Overview
+## 🚀 Live Demo
 
-This project predicts the winning probability of the chasing team during an Indian Premier League (IPL) match using Machine Learning.
+The project is deployed on **Streamlit Community Cloud**.
 
-The model takes the current match situation as input, including:
-
-- Batting Team
-- Bowling Team
-- Host City
-- Target Score
-- Current Score
-- Balls Remaining
-- Wickets Remaining
-- Current Run Rate (CRR)
-- Required Run Rate (RRR)
-
-Based on these features, the model predicts the probability of both teams winning the match.
-
-The project also includes a Streamlit web application where users can interactively enter match details and get live win probability predictions.
+👉 **Live Application:**  
+https://LIVE_DEMO_LINK
 
 ---
 
 ## 📂 Dataset
 
-The project uses historical IPL ball-by-ball data.
+The project uses historical IPL datasets.
 
 ### Files Used
 
@@ -99,40 +57,44 @@ The project uses historical IPL ball-by-ball data.
 The dataset was cleaned by:
 
 - Removing Duckworth-Lewis (D/L) affected matches
-- Standardizing old team names
-- Filtering only second innings matches
-- Engineering match-state features
+- Standardizing old franchise names
+- Filtering only second innings data
 - Removing missing values
+- Creating match-state features
 
 ---
 
 ## ⚙️ Feature Engineering
 
-The following features were created from the raw dataset:
+The following features were created:
 
 | Feature | Description |
 |----------|-------------|
 | Runs Left | Runs required to win |
 | Balls Left | Balls remaining |
-| Wickets | Wickets remaining |
-| Target Score | First innings total |
+| Wickets Remaining | Wickets left |
+| Target Score | First innings score |
 | Current Run Rate | Current scoring rate |
 | Required Run Rate | Required scoring rate |
 | Batting Team | Chasing team |
 | Bowling Team | Defending team |
 | City | Match venue |
 
+These engineered features describe the current match situation and are used as inputs to the Machine Learning models.
+
 ---
 
 ## 🤖 Machine Learning Models
 
-Three machine learning algorithms were trained and evaluated.
+The following classification models were trained and compared:
 
 - Logistic Regression
-- K-Nearest Neighbors (KNN)
 - Random Forest Classifier
+- K-Nearest Neighbors (KNN)
 
-To obtain realistic evaluation results, the dataset was split using **GroupShuffleSplit**, ensuring that deliveries from the same match were never present in both the training and testing sets. This prevents data leakage and provides a more reliable estimate of model performance.
+To obtain realistic evaluation results, the dataset was split using **GroupShuffleSplit**, ensuring that deliveries from the same IPL match never appeared in both the training and testing sets.
+
+This prevented **data leakage** and produced reliable performance estimates.
 
 ---
 
@@ -144,36 +106,44 @@ To obtain realistic evaluation results, the dataset was split using **GroupShuff
 | Random Forest | 75.78% |
 | K-Nearest Neighbors | 69.61% |
 
-Additional evaluation metrics used:
+### Evaluation Metrics
 
 - Accuracy
 - Precision
 - Recall
 - F1 Score
-- Confusion Matrix
 - ROC Curve
-- Feature Importance (Random Forest)
+- Confusion Matrix
 
 ---
 
-## 🎯 Final Model Selection
+## 🎯 Final Model
 
-Although multiple machine learning models were evaluated, **Logistic Regression** was selected as the final deployment model because it achieved the best overall accuracy on the match-wise split dataset while also providing well-calibrated probability estimates suitable for win probability prediction.
+Among all evaluated models, **Logistic Regression** was selected for deployment because it:
 
----
-
-## 🌐 Streamlit Web Application
-
-The project includes a Streamlit application where users can:
-
-- Select batting and bowling teams
-- Choose the host city
-- Enter the current match situation
-- Predict win probabilities instantly
+- Achieved the highest accuracy
+- Produced stable probability estimates
+- Was computationally efficient
+- Was well-suited for live probability prediction
 
 ---
 
-## 🛠️ Technologies Used
+## 🌐 Streamlit Application
+
+The web application allows users to:
+
+- Select Batting Team
+- Select Bowling Team
+- Choose Host City
+- Enter Target Score
+- Enter Current Score
+- Enter Overs Completed
+- Enter Wickets Fallen
+- Predict live winning probabilities instantly
+
+---
+
+## 🛠️ Tech Stack
 
 - Python
 - Pandas
@@ -187,8 +157,8 @@ The project includes a Streamlit application where users can:
 
 ## 📁 Project Structure
 
-```
-IPL_WIN_PREDICTOR
+```text
+IPL-Win-Probability-Predictor
 │
 ├── app.py
 ├── pipe.pkl
@@ -201,18 +171,47 @@ IPL_WIN_PREDICTOR
 
 ---
 
-## 🚀 Installation
+## 🔄 Project Workflow
+
+```text
+Raw IPL Dataset
+        │
+        ▼
+Data Cleaning
+        │
+        ▼
+Feature Engineering
+        │
+        ▼
+GroupShuffleSplit
+        │
+        ▼
+Model Training
+        │
+        ▼
+Model Evaluation
+        │
+        ▼
+Model Selection
+        │
+        ▼
+Streamlit Deployment
+```
+
+---
+
+## ▶️ Installation
 
 Clone the repository
 
 ```bash
-git clone https://github.com/Kush91-bit/IPL_WIN_PREDICTOR.git
+git clone https://github.com/Kush91-bit/IPL-Win-Probability-Predictor.git
 ```
 
-Go to project directory
+Move into the project directory
 
 ```bash
-cd IPL_WIN_PREDICTOR
+cd IPL-Win-Probability-Predictor
 ```
 
 Install dependencies
@@ -221,7 +220,7 @@ Install dependencies
 pip install -r requirements.txt
 ```
 
-Run the Streamlit app
+Run the Streamlit application
 
 ```bash
 streamlit run app.py
@@ -229,13 +228,13 @@ streamlit run app.py
 
 ---
 
-## 📈 Future Improvements
+## 💡 Future Improvements
 
-- Train using the latest IPL dataset
-- Include player-level statistics
-- Incorporate venue-specific performance metrics
-- Explore advanced models such as XGBoost and LightGBM
-- Deploy the application on Streamlit Community Cloud
+- Train on the latest IPL seasons
+- Add player-level statistics
+- Include venue-specific performance
+- Experiment with XGBoost and LightGBM
+- Improve UI/UX with richer visualizations
 
 ---
 
@@ -246,3 +245,5 @@ streamlit run app.py
 Computer Science Engineering Student
 
 GitHub: https://github.com/Kush91-bit
+
+Live Demo: https://ipl-win-probability-predictor-4wrrnpckoz5socfw3zdkgl.streamlit.app/
